@@ -1,0 +1,44 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '9.0'
+
+target 'QuickNail' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+  pod 'Alamofire', '~> 4.0.1'
+  pod 'RxSwift', '~> 3.0.0'
+  pod 'RxCocoa', '~> 3.0.0'
+  pod 'MBProgressHUD', '~> 1.0.0'
+  pod 'Kingfisher', '~> 3.1.4'
+  pod 'SwiftyJSON', '~> 3.1.1'
+  pod 'MJRefresh', '~> 3.1.12'
+  pod 'SnapKit', '~> 3.0.2'
+  pod 'SVProgressHUD', '~> 2.0.3'
+  pod 'RxDataSources', '~> 1.0.0'
+  pod 'Masonry', '~> 0.6.3'
+  pod 'YYKit', '~> 1.0.7'
+  pod 'SDCycleScrollView','~> 1.64'
+  pod 'MJExtension'
+  pod 'FMDB', '~> 2.6.2'
+  pod 'CYLTabBarController', "~> 1.8.0"
+  pod 'FTPopOverMenu'
+  pod "FXForms", "~> 1.2.14"
+  pod 'IQKeyboardManager'
+  pod 'FTIndicator', '~> 1.1.9' # 提示相关
+  pod 'APNumberPad', '~> 1.2.0' # 数字键盘
+  pod 'SwiftySound', '~> 0.1.1' # 播放声音
+  pod 'SwiftyTimer', '~> 2.0.0' # 倒计时
+  pod 'SDWebImage', '~> 4.0.0'
+  pod 'SWRevealViewController', '~> 2.3.0'
+  # Pods for QuickNail
+
+  target 'QuickNailTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'QuickNailUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
