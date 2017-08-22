@@ -48,7 +48,7 @@ class ImplementationRegisterDelegate: RegisterDelegate {
     //注册 网络请求
     func registerUp(userName: String, password: String) -> Observable<Bool> {
         
-        return Observable.create({ (observer) -> Disposable in
+            return Observable.create({ (observer) -> Disposable in
             
             let paraDic = [
                 "usertel":String(userName),
@@ -57,91 +57,106 @@ class ImplementationRegisterDelegate: RegisterDelegate {
             
             printLog(message: "参数 ---- \(paraDic)")
             
-            let dataTask : URLSessionTask = NetWorkiTools.requestData(method:MethodType.postType, urlString:registerUrl, paraDic: paraDic, successNetWorkingToolsBlock: { (resObject) in
-                
-                printLog(message: "注册成功了 -- \(resObject)")
-                
-                var isSuccess = false
-                
-                if (resObject["ErrorCode"]?.isEqual(to: errorCode))!{
-                    isSuccess = true
+            //DispatchQueue基本用法异步async：在子线程执行耗时操作完成后，将结果刷新到界面
+            //创建线程
+            
+//            let queue = DispatchQueue.init(label: "registerUp")
+            
+//            queue.async {
+            
+                let dataTask : URLSessionTask = NetWorkiTools.requestData(method:MethodType.postType, urlString:registerUrl, paraDic: paraDic, successNetWorkingToolsBlock: { (resObject) in
+                    
+                    printLog(message: "注册成功了 -- \(resObject)")
+                    
+                    var isSuccess = false
+                    
+                    if (resObject["ErrorCode"]?.isEqual(to: errorCode))!{
+                        isSuccess = true
+                    }
+                    
+                    observer.onNext(isSuccess)
+                    
+                    observer.onCompleted()
+                    
+                }) { (error) in
+                    
+                    printLog(message: "注册失败了 -- \(error)")
+                    
+                    observer.onNext(false)
+                    
+                    observer.onCompleted()
+                    
                 }
                 
-                observer.onNext(isSuccess)
-                
-                observer.onCompleted()
-                
-            }) { (error) in
-                
-                printLog(message: "注册失败了 -- \(error)")
-                
-                observer.onNext(false)
-                
-                observer.onCompleted()
+                return Disposables.create(with: {
+                    dataTask.cancel()
+                })//释放资源
 
-            }
-
-            return Disposables.create(with: {
-                dataTask.cancel()
-            })//释放资源
+//            }
+            
             
         })
         
+        /*
+        let signupResult = arc4random() % 5 == 0 ? false : true
         
-//        
-//        let signupResult = arc4random() % 5 == 0 ? false : true
-//        
-//        return Observable.just(signupResult)
-//            .delay(1.0, scheduler: MainScheduler.instance)
-
+        return Observable.just(signupResult)
+            .delay(1.0, scheduler: MainScheduler.instance)
+        */
     }
     
     
     //忘记密码 网络请求
     func forgetUp(userName:String,password:String) -> Observable<Bool>{
         
-        return Observable.create({ (observer) -> Disposable in
+
+        return Observable.create({(observer) -> Disposable in
             
             let paraDic = [
                 "usertel":String(userName),
                 "newpwd":String(password)
                 ] as [String : AnyObject]
             
-            printLog(message: "参数 ---- \(paraDic)")
+            //DispatchQueue基本用法异步async：在子线程执行耗时操作完成后，将结果刷新到界面
+            //创建线程
+//            let queue = DispatchQueue.init(label: "com.forget")
             
-            let dataTask : URLSessionTask = NetWorkiTools.requestData(method:MethodType.postType, urlString:forgetPasswordUrl, paraDic: paraDic, successNetWorkingToolsBlock: { (resObject) in
-                
-                printLog(message: "忘记密码成功了 -- \(resObject)")
-                
-                var isSuccess = false
-                
-                if (resObject["ErrorCode"]?.isEqual(to: errorCode))!{
-                    isSuccess = true
+//            queue.async {
+            
+                let dataTask : URLSessionTask = NetWorkiTools.requestData(method:MethodType.postType, urlString:forgetPasswordUrl, paraDic: paraDic, successNetWorkingToolsBlock: { (resObject) in
+                    
+                    printLog(message: "忘记密码成功了 -- \(resObject)")
+                    
+                    var isSuccess = false
+                    
+                    if (resObject["ErrorCode"]?.isEqual(to: errorCode))!{
+                        isSuccess = true
+                    }
+                    
+                    observer.onNext(isSuccess)
+                    
+                    observer.onCompleted()
+                    
+                }) { (error) in
+                    
+                    printLog(message: "忘记密码失败了 -- \(error)")
+                    
+                    observer.onNext(false)
+                    
+                    observer.onCompleted()
+                    
                 }
                 
-                observer.onNext(isSuccess)
-                
-                observer.onCompleted()
-                
-            }) { (error) in
-                
-                printLog(message: "忘记密码失败了 -- \(error)")
-                
-                observer.onNext(false)
-                
-                observer.onCompleted()
-                
-            }
-            
-            return Disposables.create(with: {
-                dataTask.cancel()
-            })//释放资源
+                return Disposables.create(with: {
+                    dataTask.cancel()
+                })//释放资源
+
+//            }
             
         })
-        
+            
     }
-    
-    
+        
     
 }
 

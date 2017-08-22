@@ -89,9 +89,15 @@ class RegisterViewModel: NSObject {
         //5.注册 调接口--- 成功或失败  将用户名 和 密码 一起绑定成一个信号
         let userNameWithPassword = Driver.combineLatest(input.userName,input.passWord) { ($0,$1) }
         
+        //DispatchQueue基本用法异步async：在子线程执行耗时操作完成后，将结果刷新到界面
+        //创建线程
+    let queue = DispatchQueue.init(label: "com.forget")
+
+    queue.async {
+
         if (self.registerType == RegisterType.registerType) { //注册
             
-            registerResult = input.loginTaps.withLatestFrom(userNameWithPassword)
+            self.registerResult = input.loginTaps.withLatestFrom(userNameWithPassword)
                 .flatMapLatest({ (userNme,password) in
                     return api.registerUp(userName: userNme, password: password).asDriver(onErrorJustReturn: false)
                 }) //信号传递到下面的 flatMapLatest 传进来的 bool 类型,返回bool类型
@@ -107,12 +113,13 @@ class RegisterViewModel: NSObject {
 
         }else if (self.registerType == RegisterType.forgtetType){//忘记密码
             
-            registerResult = input.loginTaps.withLatestFrom(userNameWithPassword)
+            self.registerResult = input.loginTaps.withLatestFrom(userNameWithPassword)
                 .flatMapLatest({ (userNme,password) in
                     return api.forgetUp(userName: userNme, password: password).asDriver(onErrorJustReturn: false)
                 }) //信号传递到下面的 flatMapLatest 传进来的 bool 类型,返回bool类型
                 .flatMapLatest({ (registerIn) -> Driver<Bool> in
                     let message  = registerIn ? "忘记成功" : "忘记失败"
+//                    return Observable.just(registerIn)
                     return wireFrame.promptFor(message, cancelAction: "OK", actions: [])
                         // propagate original value
                         .map { _ in
@@ -124,6 +131,7 @@ class RegisterViewModel: NSObject {
         }
         
         
+    }
         //4.缓存注册按钮交互
         cacheSignupEnabled()
 

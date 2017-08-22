@@ -58,21 +58,29 @@ class LoginViewModel: NSObject {
         //登录结果
         let usernameAndPwd = Observable.combineLatest(input.phoneString, input.passwordString) { ($0, $1) }
         
-        loginResult = input.loginTaps.asObservable().withLatestFrom(usernameAndPwd).flatMapLatest({ (phone,password) in
-            return api.login(phoneString: phone, passwordString: password)
-        }).flatMapLatest({ (registerIn) -> Observable<Bool> in
-            let message  = registerIn ? "登录成功" : "登录失败"
-            printLog(message: "\(message)")
-            return Observable.just(registerIn)
+        
+        //DispatchQueue基本用法异步async：在子线程执行耗时操作完成后，将结果刷新到界面
+        //创建线程
+        let queue = DispatchQueue.init(label: "com.login")
+        
+        queue.async {
+            
+            self.loginResult = input.loginTaps.asObservable().withLatestFrom(usernameAndPwd).flatMapLatest({ (phone,password) in
+                return api.login(phoneString: phone, passwordString: password)
+            }).flatMapLatest({ (registerIn) -> Observable<Bool> in
+                let message  = registerIn ? "登录成功" : "登录失败"
+                printLog(message: "\(message)")
+                return Observable.just(registerIn)
 //            return wireFrame.promptFor(message, cancelAction: "OK", actions: [])
 //                // propagate original value
 //                .map { _ in
 //                    registerIn
 //                }
 //                .asDriver(onErrorJustReturn: false)
-        }).shareReplay(1)
+            }).shareReplay(1)
 
-
+        }
+        
         //登录按钮是否可用
         loginBtnEnable = Observable.combineLatest(phoneValid, passwordValid) {
             return $0 && $1

@@ -128,7 +128,12 @@ extension RegisterViewController {
                             
                             print("用户 注册 \(registerResult)")
                             if registerResult{
-                                self?.navigationController?.popViewController(animated: true)
+                               
+                                //主线程刷新
+                                DispatchQueue.main.async {
+                                     self?.navigationController?.popViewController(animated: true)
+                                }
+                                
                             }
                             
                          })

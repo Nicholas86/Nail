@@ -80,11 +80,14 @@ class QuilkNailNetWorkTools: NSObject {
                     let json = JSON(result)
                     
                     //将结果blcok出去
-                    if let jsonObject: AnyObject = json.rawValue as AnyObject? {
+                    successQuickBlock(json.rawValue as! [String : AnyObject])
+
+                    /*
+                    if let jsonObject: AnyObject = json.rawValue as? AnyObject{
                         //SVProgressHUD.showError(withStatus: "加载失败...")
                         successQuickBlock(jsonObject as! [String : AnyObject])
                     }
-                    
+                    */
                 }else if (response.result.isFailure){ //失败
                     
                     failueQuickBlock(response.result.error! as NSError)

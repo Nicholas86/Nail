@@ -30,51 +30,62 @@ class ImplementLoginDelegate: LoginDelegate {
                 "pwd":String(passwordString)
                 ] as [String : AnyObject]
             
-            let dataTask : URLSessionTask = NetWorkiTools.requestData(method:MethodType.postType, urlString:loginUrl, paraDic: paraDic, successNetWorkingToolsBlock: { (resObject) in
-                
-                printLog(message: "登录成功了 -- \(resObject)")
-                
-                var isSuccess = false
-                
-                if (resObject["ErrorCode"]?.isEqual(to: errorCode))!{
-                    //登录网络请求后,封装登录userModel数据,保存userModel数据到UserManagerSingleton中
-                    let content : Array = resObject["Content"] as! [AnyObject]
+            //DispatchQueue基本用法异步async：在子线程执行耗时操作完成后，将结果刷新到界面
+            //创建线程
+            
+//            let queue = DispatchQueue.init(label: "registerUp")
 
-                    for paraDic in content{
-
-                        let userModel = UserModel.init(resultDic: paraDic as! [String : AnyObject])
-
-                        userManagerSingleton.userId = userModel.cid ?? ""
-                        userManagerSingleton.userName = userModel.username ?? ""
-                        userManagerSingleton.usertel = userModel.usertel ?? ""
+//            queue.async {
+            
+                let dataTask : URLSessionTask = NetWorkiTools.requestData(method:MethodType.postType, urlString:loginUrl, paraDic: paraDic, successNetWorkingToolsBlock: { (resObject) in
+                    
+                    printLog(message: "登录成功了 -- \(resObject)")
+                    
+                    var isSuccess = false
+                    
+                    if (resObject["ErrorCode"]?.isEqual(to: errorCode))!{
+                        //登录网络请求后,封装登录userModel数据,保存userModel数据到UserManagerSingleton中
+                        let content : Array = resObject["Content"] as! [AnyObject]
+                        
+                        for paraDic in content{
+                            
+                            let userModel = UserModel.init(resultDic: paraDic as! [String : AnyObject])
+                            
+                            userManagerSingleton.userId = userModel.cid ?? ""
+                            userManagerSingleton.userName = userModel.username ?? ""
+                            userManagerSingleton.usertel = userModel.usertel ?? ""
+                            
+                        }
+                        
+                        //将单例归档到UserDefault中,便于二次登录
+                        NSKeyedArchiverManager.recoderUserInfo()
                         
                     }
                     
-                    //将单例归档到UserDefault中,便于二次登录
-                    NSKeyedArchiverManager.recoderUserInfo()
-                
+                    isSuccess = true
+                    
+                    observer.onNext(isSuccess)
+                    
+                    observer.onCompleted()
+                    
+                }) { (error) in
+                    
+                    observer.onNext(false)
+                    
+                    observer.onCompleted()
+                    
                 }
                 
-                isSuccess = true
-                
-                observer.onNext(isSuccess)
-                
-                observer.onCompleted()
-                
-            }) { (error) in
-                
-                observer.onNext(false)
-                
-                observer.onCompleted()
-                
-            }
+                return Disposables.create(with: {
+                    dataTask.cancel()
+                })//释放资源
+
+//            }
             
-            return Disposables.create(with: {
-                dataTask.cancel()
-            })//释放资源
             
         })
     
+        
     }
     
     

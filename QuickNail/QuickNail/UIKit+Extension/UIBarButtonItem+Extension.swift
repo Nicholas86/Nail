@@ -20,7 +20,6 @@ extension UIBarButtonItem {
         btn.backgroundColor = redColor
         btn.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
         btn.addTarget(leftTarget, action: action, for: UIControlEvents.touchUpInside)
-        
         self.init(customView: btn)
     }
     

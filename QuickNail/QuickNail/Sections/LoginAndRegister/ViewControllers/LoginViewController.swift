@@ -35,6 +35,7 @@ class LoginViewController: BaseViewController {
     
 
     lazy var loginViewModel: LoginViewModel = {
+        
         let loginViewModel = LoginViewModel.init(
             
             input: (
@@ -45,8 +46,11 @@ class LoginViewController: BaseViewController {
             
             dependency: (
                 loginServiceDelegate: ImplementLoginServiceDelegate.sharedLoginService,
-                         api: ImplementLoginDelegate.sharedImplementLoginDelegate))
+                         api: ImplementLoginDelegate.sharedImplementLoginDelegate)
+            )
+        
         return loginViewModel
+        
     }()
     
     
@@ -55,7 +59,6 @@ class LoginViewController: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        printLog(message: "登录")
         
         bindData()
       
@@ -117,9 +120,17 @@ extension LoginViewController {
                 if result {
                     
                     printLog(message: "登录成功 \(result)")
+                    
                     //self?.showAlter(message: "登录成功！")
-                    let baseTabBarVC = self?.viewControllerFromStoryboar(storboordName: "Main", storboardControllerIdentifier: "baseTabBarViewController") as! BaseTabBarViewController
-                    UIApplication.shared.keyWindow?.rootViewController = baseTabBarVC
+                    //主线程刷新
+                    DispatchQueue.main.async {
+                        
+                        let baseTabBarVC = self?.viewControllerFromStoryboar(storboordName: "Main", storboardControllerIdentifier: "baseTabBarViewController") as! BaseTabBarViewController
+                        
+                        UIApplication.shared.keyWindow?.rootViewController = baseTabBarVC
+
+                    }
+
                     
                 } else {
                     printLog(message: "用户名或密码不正确 \(result)")
