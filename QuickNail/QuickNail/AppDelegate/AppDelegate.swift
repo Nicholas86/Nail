@@ -23,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupGlobalStyle()
         //便于二次登陆
         login()
-        
         return true
     }
 

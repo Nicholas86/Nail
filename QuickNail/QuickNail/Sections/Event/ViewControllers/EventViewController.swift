@@ -17,6 +17,16 @@ class EventViewController: BaseViewController {
         return eventView
     }()
     
+    lazy var locationTracker: LocationTracker = {
+        let locationTracker = LocationTracker()
+        return locationTracker
+    }()
+    
+    lazy var propertyDetailView: PropertyDetailView = {
+        let propertyDetailView = PropertyDetailView(frame: self.view.bounds)
+        return propertyDetailView
+    }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,14 +51,26 @@ class EventViewController: BaseViewController {
 
     override func configurationBaseViews() {
         
-        //1.事件列表
         view.addSubview(eventView)
+        
+        //1.事件列表
+        //view.addSubview(eventView)
         
         //2.侧滑导航栏
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(leftTarget: self, action: #selector(leftBarBtn))
 //        addLeftBarMenu(leftMenuButton: UIBarButtonItem.init(leftTarget: self, action: #selector(leftBarBtn)))
         
-        //3.
+        //3.定位
+        self.locationTracker.getCurrentLocation(
+            success: { (currentLocation) in
+            
+            printLog(message: "定位成功  \(currentLocation)")
+                
+        },fail: { (errorMessage) in
+            
+            printLog(message: "定位失败 \(errorMessage)")
+
+        })
         
     }
     

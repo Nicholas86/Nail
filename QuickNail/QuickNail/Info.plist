@@ -27,6 +27,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>你的位置将用于定位当前所在城市</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>需要调取你的相册</string>
 	<key>UILaunchStoryboardName</key>

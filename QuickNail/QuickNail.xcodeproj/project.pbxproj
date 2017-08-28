@@ -58,6 +58,11 @@
 		4797ADE51F3862440028B89E /* TwoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4797ADE31F3862430028B89E /* TwoTableViewCell.swift */; };
 		4797ADE61F3862440028B89E /* TwoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4797ADE41F3862430028B89E /* TwoTableViewCell.xib */; };
 		4797ADE81F3872520028B89E /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4797ADE71F3872520028B89E /* HelpViewController.swift */; };
+		47ACF98C1F53B83C00F842BB /* LocationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47ACF98B1F53B83C00F842BB /* LocationTracker.swift */; };
+		47ACF98E1F53BD4200F842BB /* StructMacros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47ACF98D1F53BD4200F842BB /* StructMacros.swift */; };
+		47ACF9901F53CA8500F842BB /* XibBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47ACF98F1F53CA8500F842BB /* XibBaseView.swift */; };
+		47ACF9931F53CD1800F842BB /* PropertyDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47ACF9911F53CD1800F842BB /* PropertyDetailView.swift */; };
+		47ACF9941F53CD1800F842BB /* PropertyDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47ACF9921F53CD1800F842BB /* PropertyDetailView.xib */; };
 		47B0CE4B1F2C59030035400C /* ImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B0CE4A1F2C59030035400C /* ImagePickerViewController.swift */; };
 		47B0CE4D1F2C59BB0035400C /* ImagePickerSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B0CE4C1F2C59BB0035400C /* ImagePickerSingleton.swift */; };
 		47B267981F45361B000B466F /* IntegralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B267971F45361B000B466F /* IntegralViewController.swift */; };
@@ -182,6 +187,11 @@
 		4797ADE31F3862430028B89E /* TwoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoTableViewCell.swift; sourceTree = "<group>"; };
 		4797ADE41F3862430028B89E /* TwoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwoTableViewCell.xib; sourceTree = "<group>"; };
 		4797ADE71F3872520028B89E /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
+		47ACF98B1F53B83C00F842BB /* LocationTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTracker.swift; sourceTree = "<group>"; };
+		47ACF98D1F53BD4200F842BB /* StructMacros.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StructMacros.swift; sourceTree = "<group>"; };
+		47ACF98F1F53CA8500F842BB /* XibBaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XibBaseView.swift; sourceTree = "<group>"; };
+		47ACF9911F53CD1800F842BB /* PropertyDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyDetailView.swift; sourceTree = "<group>"; };
+		47ACF9921F53CD1800F842BB /* PropertyDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PropertyDetailView.xib; sourceTree = "<group>"; };
 		47B0CE4A1F2C59030035400C /* ImagePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerViewController.swift; sourceTree = "<group>"; };
 		47B0CE4C1F2C59BB0035400C /* ImagePickerSingleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerSingleton.swift; sourceTree = "<group>"; };
 		47B267971F45361B000B466F /* IntegralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntegralViewController.swift; sourceTree = "<group>"; };
@@ -373,6 +383,7 @@
 			isa = PBXGroup;
 			children = (
 				4790473F1F412CEF009BF068 /* BaseModel.swift */,
+				47ACF98F1F53CA8500F842BB /* XibBaseView.swift */,
 				47F717621F28380500AE9879 /* BaseViewController.swift */,
 				47E4251C1F32B07900136803 /* BaseNavigationController.swift */,
 				47F717641F283BFB00AE9879 /* BaseTabBarViewController.swift */,
@@ -398,6 +409,7 @@
 				47B89CCD1F29C5AF001CEAF7 /* NSKeyedArchiverManager.swift */,
 				47B0CE4A1F2C59030035400C /* ImagePickerViewController.swift */,
 				47B0CE4C1F2C59BB0035400C /* ImagePickerSingleton.swift */,
+				47ACF98B1F53B83C00F842BB /* LocationTracker.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -420,6 +432,7 @@
 				479749C31F1476A300033B36 /* APIMacros.swift */,
 				479749C41F1476A300033B36 /* APPMacros.swift */,
 				479749C51F1476A300033B36 /* ToolsMacros.swift */,
+				47ACF98D1F53BD4200F842BB /* StructMacros.swift */,
 			);
 			path = Macros;
 			sourceTree = "<group>";
@@ -630,6 +643,8 @@
 		47F717521F2835EA00AE9879 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				47ACF9911F53CD1800F842BB /* PropertyDetailView.swift */,
+				47ACF9921F53CD1800F842BB /* PropertyDetailView.xib */,
 				47F306C91F34138A00CF4485 /* EventView.swift */,
 				47F306CB1F34166400CF4485 /* EventTableViewCell.swift */,
 				47F306CC1F34166400CF4485 /* EventTableViewCell.xib */,
@@ -949,6 +964,7 @@
 				47B2679C1F4565B7000B466F /* IntegralTableViewCell.xib in Resources */,
 				47683DD21F3E9B4E00CFD91F /* MessageTableViewCell.xib in Resources */,
 				4731A63F1F145F3A00ED316B /* LaunchScreen.storyboard in Resources */,
+				47ACF9941F53CD1800F842BB /* PropertyDetailView.xib in Resources */,
 				4731A63C1F145F3A00ED316B /* Assets.xcassets in Resources */,
 				4797ADE11F385BE20028B89E /* NickNameTableViewCell.xib in Resources */,
 				477F9E2B1F3C4B7400BEDB66 /* SexViewTableViewCell.xib in Resources */,
@@ -1135,6 +1151,7 @@
 				4797ADE51F3862440028B89E /* TwoTableViewCell.swift in Sources */,
 				47B89CC81F29BBE3001CEAF7 /* UserManangerSingleton.swift in Sources */,
 				47775C2A1F2AC90F007685AF /* SMBProgressHUD.swift in Sources */,
+				47ACF9901F53CA8500F842BB /* XibBaseView.swift in Sources */,
 				47F717671F283D1E00AE9879 /* EventViewController.swift in Sources */,
 				47F717631F28380500AE9879 /* BaseViewController.swift in Sources */,
 				47F306CD1F34166400CF4485 /* EventTableViewCell.swift in Sources */,
@@ -1171,8 +1188,10 @@
 				474BED0C1F3EB51D00EB7240 /* CollectionViewController.swift in Sources */,
 				476FB8521F3AB1CB005C47A5 /* Wireframe.swift in Sources */,
 				479047401F412CEF009BF068 /* BaseModel.swift in Sources */,
+				47ACF98E1F53BD4200F842BB /* StructMacros.swift in Sources */,
 				47F7176D1F283DD100AE9879 /* ContactViewController.swift in Sources */,
 				47B0CE4D1F2C59BB0035400C /* ImagePickerSingleton.swift in Sources */,
+				47ACF98C1F53B83C00F842BB /* LocationTracker.swift in Sources */,
 				47E425241F32D14000136803 /* UIViewController+Extension.swift in Sources */,
 				479749C81F1476A300033B36 /* APPMacros.swift in Sources */,
 				479749C91F1476A300033B36 /* ToolsMacros.swift in Sources */,
@@ -1187,6 +1206,7 @@
 				47B89CCA1F29C108001CEAF7 /* LoginViewController.swift in Sources */,
 				474BED0F1F3ED6EE00EB7240 /* CollectionOneTableViewCell.swift in Sources */,
 				47E4251D1F32B07900136803 /* BaseNavigationController.swift in Sources */,
+				47ACF9931F53CD1800F842BB /* PropertyDetailView.swift in Sources */,
 				4784B6F71F3BF90800E135E4 /* NickNameViewController.swift in Sources */,
 				477F9E2A1F3C4B7300BEDB66 /* SexViewTableViewCell.swift in Sources */,
 				470C7B331F3D53C9008A23E4 /* NetWorkiTools.swift in Sources */,

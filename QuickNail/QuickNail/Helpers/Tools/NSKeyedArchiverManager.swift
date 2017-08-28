@@ -11,14 +11,14 @@ import UIKit
 class NSKeyedArchiverManager: NSObject {
 
     //归档到userDefaults
-    class func recoderUserInfo() -> Void {
+    static func recoderUserInfo() -> Void {
         let data = NSKeyedArchiver.archivedData(withRootObject: userManagerSingleton)
         userDefaults.setValue(data, forKey: LoginUserInfoKey)
         userDefaults.synchronize()
     }
 
     /// 退出登录,清空归档信息
-    class func loginOut() {
+    static func loginOut() {
         userDefaults.removeObject(forKey: LoginUserInfoKey)
         userDefaults.synchronize()
     }

@@ -8,7 +8,7 @@
 
 import Foundation
 /// 基础接口
-let baseUrl = "http://kuaiding.sebon.com.cn/index.php?r=api/index/"
+let baseUrl = "http://kuaiding.sebon.com.cn/api/index/"
 let registerUrl = baseUrl + "register"//1.注册
 let loginUrl = baseUrl + "login"//2.登录
 let showMemberInfoUrl = baseUrl  + "sportcmbs/member/showMemberInfo.htm" //3.显示用户资料
