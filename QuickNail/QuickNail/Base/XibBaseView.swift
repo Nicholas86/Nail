@@ -38,6 +38,7 @@ class XibBaseView:UIView {
             }
         }
     }
+    
     func addConstraint(format: String, views: [String : UIView]) {
         let constraints = NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutFormatOptions(), metrics: nil, views: views)
         self.addConstraints(constraints)

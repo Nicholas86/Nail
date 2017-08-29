@@ -23,6 +23,13 @@ class NSKeyedArchiverManager: NSObject {
         userDefaults.synchronize()
     }
 
+    //归档定位城市
+    static func recorderLocationString() ->Void {
+        let data = NSKeyedArchiver.archivedData(withRootObject: utilHelpSingleton)
+        userDefaults.setValue(data, forKey: LocationCityString)
+        userDefaults.synchronize()
+    }
+    
     
 }
 

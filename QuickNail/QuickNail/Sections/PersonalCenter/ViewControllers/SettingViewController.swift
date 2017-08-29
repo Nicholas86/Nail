@@ -83,7 +83,7 @@ extension SettingViewController  :UITableViewDataSource,UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let sb = UIStoryboard(name: "PersonalStoryboard", bundle: nil)
+        //let sb = UIStoryboard(name: "PersonalStoryboard", bundle: nil)
         
         //        if indexPath.row == 1 {
         //            let helpVC = sb.instantiateViewController(withIdentifier: "helpViewController") as! HelpViewController

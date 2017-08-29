@@ -8,68 +8,51 @@
 
 import UIKit
 
-class UtilHelpSingleton: NSObject {
+class UtilHelpSingleton: NSObject,NSCoding {
 
-    //创建单例
-    static let shareUtilHelpSingleton = UtilHelpSingleton()
+    //城市
+    public var cityString : String = ""
     
-    //私有化初始化
-    fileprivate override init() {}
+    //创建单例
+    private static  var instance : UtilHelpSingleton! = nil
+    
+    static func shareUtilHelpSingleton() -> UtilHelpSingleton {
+        
+        if instance == nil {
+            //第一次启动时,先走解归档,为userId,userName赋值
+            let obj = getInstanceFromLocation()
+            instance = obj ?? UtilHelpSingleton()
+        }
+        
+        return instance
+    }
+    
+    //私有初始化
+    private override init() {}
+    
+    
+    //解档
+    required init?(coder aDecoder: NSCoder) {
+        super.init()
+        self.cityString = aDecoder.decodeObject(forKey: "cityString") as! String
+    }
+    
+    /// 归档
+    ///
+    /// - Parameter aCoder: <#aCoder description#>
+    func encode(with aCoder: NSCoder) {
+        
+        aCoder.encode(self.cityString, forKey: "cityString")
+        
+    }
+
     
     //保存网络状态
     var networkStatus : Bool = true
     
-//    //保存登录接口数据
-//    func saveLoginDataToLocalFile(loginModel : LoginModel) -> Void {
-//        
-//        //存储前先移除
-//        removeLoginDataFromLocalFile()
-//        var userDic = [String : String]()
-//        userDic["account"] = String(loginModel.account)
-//        userDic["id"] = String(loginModel.id)
-//
-//        /*
-//        if let unwrappedNickName: String = loginModel.nickName  {
-//            userDic["nickName"] = unwrappedNickName
-//        }else{
-//            userDic["nickName"] = "昵称"
-//        }
-//       */
-//        
-//        userDic["nickName"] = loginModel.nickName ?? "昵称"
-//        
-//        /*
-//        if let unwrappedRealName: String = loginModel.realName  {
-//            userDic["realName"] = unwrappedRealName
-//        }else{
-//            userDic["realName"] = "姓名"
-//        }
-//       */
-//        userDic["realName"] = loginModel.realName ?? "姓名"
-//        
-//        /*
-//        if let unwrappedHeadRealPath: String = loginModel.headRealPath  {
-//            userDic["headRealPath"] = unwrappedHeadRealPath
-//        }else{
-//            userDic["headRealPath"] = "图像"
-//        }
-//        */
-//        userDic["headRealPath"] = loginModel.headRealPath ?? "图像"
-//        
-//        /*
-//        if let unwrappedBirthday: String = loginModel.birthday  {
-//            userDic["birthday"] = unwrappedBirthday
-//        }else{
-//            userDic["birthday"] = "生日"
-//        }
-//        */
-//        userDic["birthday"] = loginModel.birthday ?? "生日"
-//
-//        userDefaults.set(userDic, forKey: "Dictionary")
-//        userDefaults.synchronize()
-//    }
-    
+
    
+    /*
     //取出登录接口数据
     func getLoginDataFromLocalFile() -> [String : String] {
         
@@ -83,17 +66,32 @@ class UtilHelpSingleton: NSObject {
         }
         
     }
+  */
   
-    //移除登录数据
-    func removeLoginDataFromLocalFile() -> Void {
-        userDefaults.removeObject(forKey: "Dictionary")
-        userDefaults.synchronize()
-    }
-    
     
     //返回网络状态
     func returnNetworkStatus() -> Bool {
         return self.networkStatus
+    }
+    
+}
+
+extension   UtilHelpSingleton {
+    
+    /// 从UserDefault中进行解归档
+    ///
+    /// - Returns: <#return value description#>
+    static func getInstanceFromLocation() -> UtilHelpSingleton? {
+        
+        guard let data = userDefaults.value(forKey: LocationCityString) as? Data else {
+            return nil
+        }
+        
+        guard let instance = NSKeyedUnarchiver.unarchiveObject(with: data) as? UtilHelpSingleton else {
+            return nil
+        }
+        
+        return instance
     }
     
 }

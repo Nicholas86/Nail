@@ -11,7 +11,6 @@ import SWRevealViewController
 
 class EventViewController: BaseViewController {
 
-    //1.事件view
     lazy var eventView: EventView = {
         let eventView = EventView.eventView(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight - CGFloat(KStatusBarHeight + KNavigationHeight + KTabBarHeight)))
         return eventView
@@ -60,11 +59,17 @@ class EventViewController: BaseViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(leftTarget: self, action: #selector(leftBarBtn))
 //        addLeftBarMenu(leftMenuButton: UIBarButtonItem.init(leftTarget: self, action: #selector(leftBarBtn)))
         
-        //3.定位
+        //3.定位 合适时机调用
+        weak var weakeSelf = self
+        
+        printLog(message: "utilHelpSingleton.cityString  \(utilHelpSingleton.cityString)")
+
         self.locationTracker.getCurrentLocation(
             success: { (currentLocation) in
             
-            printLog(message: "定位成功  \(currentLocation)")
+                DispatchQueue.main.async {
+                   ShowMBProgressHUD.showAndDelayHideMBProgressHUD(view: (weakeSelf?.view)!, titleString: "当前定位城市:\(currentLocation)", delay: 2.0)
+                }
                 
         },fail: { (errorMessage) in
             

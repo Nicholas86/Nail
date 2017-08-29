@@ -61,7 +61,7 @@ let H8 = UIFont.systemFont(ofSize: 8)
 //NSUserDefaults
 let userDefaults = Foundation.UserDefaults.standard
 //单例
-let utilHelpSingleton = UtilHelpSingleton.shareUtilHelpSingleton
+let utilHelpSingleton = UtilHelpSingleton.shareUtilHelpSingleton()
 //图片
 func ImageName(_ string : String)->UIImage?{
     return UIImage(named: string)
@@ -83,7 +83,9 @@ let cityNotificationName = "cityNotificationName"
 let aliPayScheme = "sportsProductOnlin"
  //归档用户信息使用的key
 let LoginUserInfoKey = "LoginUserInfoKey"
-//全局单例
+//定位城市key
+let LocationCityString = "LocationCityString"
+//用户登录信息单例
 let userManagerSingleton = UserManangerSingleton.share()
 //调取相机单例
 let imagePickerSingleton = ImagePickerSingleton.share()
