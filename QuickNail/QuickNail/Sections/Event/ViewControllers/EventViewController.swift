@@ -62,7 +62,6 @@ class EventViewController: BaseViewController {
         //3.定位 合适时机调用
         weak var weakeSelf = self
         
-        printLog(message: "utilHelpSingleton.cityString  \(utilHelpSingleton.cityString)")
 
         self.locationTracker.getCurrentLocation(
             success: { (currentLocation) in

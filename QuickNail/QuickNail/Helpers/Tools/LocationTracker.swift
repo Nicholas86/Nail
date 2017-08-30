@@ -22,12 +22,11 @@ class LocationTracker :NSObject, CLLocationManagerDelegate {
     func getCurrentLocation(success: ((String) -> Void)?, fail: ((String) -> Void)?){
         
         if !(CLLocationManager.locationServicesEnabled()) {
-            //            showMBProgressAndDelayHideMBProgressHUD("您的定位功能尚未设置打开,请设置打开", delay: 1.0)
+            //showMBProgressAndDelayHideMBProgressHUD("您的定位功能尚未设置打开,请设置打开", delay: 1.0)
             UIApplication.shared.openURL(urlImage(urlString: UIApplicationOpenSettingsURLString))
             return;
         }
 
-        
         self.locationManager = CLLocationManager()
         
         self.geocoder = CLGeocoder()
@@ -87,10 +86,8 @@ class LocationTracker :NSObject, CLLocationManagerDelegate {
                     //self.cityStr = string
                     return
                 }
-          
 
                 guard utilHelpSingleton.cityString != string else{
-                    
                     return
                 }
             
@@ -104,7 +101,6 @@ class LocationTracker :NSObject, CLLocationManagerDelegate {
         self.locationManager?.stopUpdatingLocation()
         self.locationManager = nil
         self.geocoder = nil
-        printLog(message: "结束定位")
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -115,16 +111,4 @@ class LocationTracker :NSObject, CLLocationManagerDelegate {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
