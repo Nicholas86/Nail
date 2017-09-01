@@ -32,6 +32,7 @@ class RegisterViewController: BaseViewController {
     
     @IBOutlet weak var finishBtn: UIButton!
     
+    @IBOutlet weak var codeBtn: UIButton!
     
     var registerType : RegisterType = RegisterType.init(rawValue: 0)!
     
@@ -42,7 +43,8 @@ class RegisterViewController: BaseViewController {
             passWord: self.passwordTextField.rx.text.orEmpty.asDriver(),
             repeatPassWord: self.repeatPasswordTextField.rx.text.orEmpty.asDriver(),
             registerType:self.registerType,
-            loginTaps: self.finishBtn.rx.tap.asDriver()),
+            loginTaps: self.finishBtn.rx.tap.asDriver(),
+            sendCodeTaps: self.codeBtn.rx.tap.asDriver()),
                                                        
             dependency: (
                 //验证 参数
@@ -79,6 +81,10 @@ class RegisterViewController: BaseViewController {
         passwordTextField.leftImageView()
         repeatPasswordTextField.leftImageView()
         
+        //self.codeBtn.isEnabled = false
+        
+        //self.codeBtn.alpha = 0.5
+
         //参数绑定
         bindData()
     }
@@ -92,7 +98,7 @@ class RegisterViewController: BaseViewController {
     
     @IBAction func codeBtn(_ sender: Any) {
         
-        
+         print("验证码按钮触发事件")
     }
     
 }
@@ -111,6 +117,17 @@ extension RegisterViewController {
             .drive(passwordTextField.rx.inputEnable) //isEnabled  isHidden
             .addDisposableTo(disposeBag)
 
+        registerViewModel.validatePhoneNumber
+            .drive(onNext: { [weak self](validationResult) in
+                if (validationResult.isValid){
+                    self?.codeBtn.isEnabled = true
+                    self?.codeBtn.alpha = 1.0
+                }else{
+                    self?.codeBtn.isEnabled = false
+                    self?.codeBtn.alpha = 0.5
+                }
+            }).addDisposableTo(disposeBag)
+        
         //2.密码 重复密码绑定
         registerViewModel.validatePassWord
             .drive(repeatPasswordTextField.rx.inputEnable)

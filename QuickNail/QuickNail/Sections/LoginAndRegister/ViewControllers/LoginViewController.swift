@@ -134,6 +134,7 @@ extension LoginViewController {
                     
                 } else {
                     printLog(message: "用户名或密码不正确 \(result)")
+                    ShowMBProgressHUD.showAndDelayHideMBProgressHUD(view: (self?.view)!, titleString: "用户名或密码不正确", delay: 1.0)
                 }
                 
             })

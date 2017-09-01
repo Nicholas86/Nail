@@ -32,6 +32,9 @@ class RegisterViewModel: NSObject {
     //6.类型: 注册 忘记密码
     var registerType : RegisterType!
     
+    //7.发送验证码
+    var sendCodeEnabled : Driver<Bool>!
+    
     //MARK:自定义初始化
     init(
         input:(
@@ -39,7 +42,8 @@ class RegisterViewModel: NSObject {
             passWord:Driver<String>,
             repeatPassWord:Driver<String>,
             registerType:RegisterType,
-            loginTaps:Driver<Void>
+            loginTaps:Driver<Void>,
+            sendCodeTaps:Driver<Void>
         ),
         dependency:(
             //验证字段是否可用
@@ -73,7 +77,6 @@ class RegisterViewModel: NSObject {
         */
         
         validatePhoneNumber = input.userName.map({ (phoneNumber) in
-            printLog(message: "接收并返回给控制器 -- \(validationServiceDelegate.validateUserName(userName: phoneNumber))")
             return validationServiceDelegate.validateUserName(userName: phoneNumber)
         })
         
@@ -119,7 +122,7 @@ class RegisterViewModel: NSObject {
                 }) //信号传递到下面的 flatMapLatest 传进来的 bool 类型,返回bool类型
                 .flatMapLatest({ (registerIn) -> Driver<Bool> in
                     let message  = registerIn ? "忘记成功" : "忘记失败"
-//                    return Observable.just(registerIn)
+                    //return Observable.just(registerIn)
                     return wireFrame.promptFor(message, cancelAction: "OK", actions: [])
                         // propagate original value
                         .map { _ in
@@ -135,6 +138,8 @@ class RegisterViewModel: NSObject {
         //4.缓存注册按钮交互
         cacheSignupEnabled()
 
+        //6.验证码按钮交互
+        //cacheCodeEnabled()
     }
 
 
@@ -156,5 +161,11 @@ extension RegisterViewModel{
     }
     
 }
+
+
+
+
+
+
 
 

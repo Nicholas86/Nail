@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        //NSKeyedArchiverManager.loginOut()
+        NSKeyedArchiverManager.loginOut()
     
         rectStatusHeight()
         //配置全局样式

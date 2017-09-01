@@ -44,10 +44,10 @@ class ImplementationRegisterValidationServiceDelegate: RegisterValidationService
         }
         
         if userName.rangeOfCharacter(from: CharacterSet.alphanumerics.inverted) != nil {
-            return (.failed(message: "用户名只能包含 数字和 字符"))
+            return (.failed(message: "用户名只能包含数字和字符"))
         }
         
-        return ValidationResult.ok(message: "用户名可用\(userName)")
+        return ValidationResult.ok(message: "手机号合法")
     }
     
     
